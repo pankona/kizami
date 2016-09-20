@@ -40,4 +40,5 @@ config :kizami, Kizami.Repo,
   password: "postgres",
   database: "kizami_dev",
   hostname: "localhost",
+  template: "template0",
   pool_size: 10

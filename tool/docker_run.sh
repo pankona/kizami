@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 # use like this:
-# cmd="service postgresql start && npm install && mix ecto.create && mix phoenix.server" ./docker_run.sh
+# cmd="service postgresql start && mix deps.get && npm install && mix ecto.create && mix phoenix.server" ./docker_run.sh
 
 docker run \
     -it \

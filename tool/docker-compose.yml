@@ -1,0 +1,19 @@
+version: '2'
+services:
+  # postgres
+  postgresql:
+    image: pankona/postgres
+    ports: 
+      - 5432:5432
+  
+  # elixir application       
+  kizami:
+    image: pankona/phoenix
+    volumes:
+      - ${PWD}/../src:/code
+    ports:
+      - 8080:4000
+    links:
+      - postgresql:db
+    command: /bin/bash -c "export DB_ADDRESS=`getent hosts db | cut -d' ' -f1` && echo $DB_ADDRESS && npm install && mix ecto.create && mix phoenix.server"
+

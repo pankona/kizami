@@ -1,0 +1,18 @@
+FROM ubuntu:latest
+
+MAINTAINER pankona <yosuke.akatsuka@gmail.com>
+
+RUN apt-get update
+RUN apt-get install -y sudo
+
+ENV PG_MAJOR 9.5
+RUN apt-get install -y postgresql
+RUN service postgresql start \
+ && sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';" \
+ && echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/$PG_MAJOR/main/pg_hba.conf \
+ && echo "listen_addresses='*'" >> /etc/postgresql/$PG_MAJOR/main/postgresql.conf
+
+EXPOSE 5432
+VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+
+CMD service postgresql start && tail -F /var/log/postgresql/postgresql-$PG_MAJOR-main.log

@@ -26,9 +26,9 @@ RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
 # install latest elixir package
 RUN apt-get install -y elixir erlang-dev erlang-parsetools && rm erlang-solutions_1.0_all.deb
 
-# install postgresql
-RUN apt-get install -y postgresql
-RUN sudo service postgresql start && sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+# install postgresql (should not be run same container with elixir app)
+# RUN apt-get install -y postgresql
+# RUN sudo service postgresql start && sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
 
 ENV PHOENIX_VERSION 1.2.1
 
@@ -43,7 +43,7 @@ RUN mix local.hex --force && mix local.rebar --force
 
 WORKDIR /code
 
-ENTRYPOINT ["/bin/bash", "-c"]
+#ENTRYPOINT ["/bin/bash", "-c"]
 
 # How to use this image:
 # docker run -it --rm -v "$PWD":/code -w /phoenix marcelocg/phoenix mix phoenix.new /code/my_new_app

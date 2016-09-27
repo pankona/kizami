@@ -2,12 +2,10 @@ defmodule Kizami.Entry do
   use Kizami.Web, :model
 
   schema "entries" do
-    field :userid, :integer
-    field :labelid, :integer
     field :desctiption, :string
 
-    belongs_to :user, Kizami.User, foreign_key: :userid
-    belongs_to :label, Kizami.Label, foreign_key: :labelid
+    belongs_to :user, Kizami.User
+    belongs_to :label, Kizami.Label
 
     timestamps()
   end

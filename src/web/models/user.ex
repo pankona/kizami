@@ -6,6 +6,7 @@ defmodule Kizami.User do
     field :password, :string
 
     has_many :labels, Kizami.Label
+    has_many :entries, Kizami.Entry
 
     timestamps()
   end

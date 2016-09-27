@@ -3,8 +3,8 @@ defmodule Kizami.Repo.Migrations.CreateEntry do
 
   def change do
     create table(:entries) do
-      add :userid, :integer
-      add :labelid, :integer
+      add :userid, references(:users)
+      add :labelid, references(:labels)
       add :desctiption, :string
 
       timestamps()

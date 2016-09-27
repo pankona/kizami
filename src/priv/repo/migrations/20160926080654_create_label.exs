@@ -3,11 +3,12 @@ defmodule Kizami.Repo.Migrations.CreateLabel do
 
   def change do
     create table(:labels) do
-      add :userid, :integer
+      add :userid, references(:users)
       add :name, :string
 
       timestamps()
     end
+    create unique_index(:labels, [:userid, :name])
 
   end
 end
